@@ -1,8 +1,7 @@
 package com.imooc.miaosha.dao;
 
-import com.imooc.miaosha.domain.User;
+import com.imooc.miaosha.pojo.User;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface UserDao {
@@ -12,4 +11,6 @@ public interface UserDao {
     int delById(Long id);
 
     int addUser(User user);
+
+    User queryUserByName(String spy);
 }

@@ -5,7 +5,7 @@
 
 <mapper namespace="com.imooc.miaosha.dao.UserDao">
 
-    <select id="queryById" parameterType="long" resultType="com.imooc.miaosha.domain.User">
+    <select id="queryById" parameterType="long" resultType="com.imooc.miaosha.pojo.User">
         select * from user where id=#{id}
     </select>
     
@@ -13,7 +13,11 @@
         delete from user where id=#{id}
     </delete>
 
-    <insert id="addUser" parameterType="com.imooc.miaosha.domain.User">
+    <insert id="addUser" parameterType="com.imooc.miaosha.pojo.User">
         insert into user (id,name) values (#{id},#{name});
     </insert>
+
+    <select id="queryUserByName" parameterType="String" resultType="com.imooc.miaosha.pojo.User">
+        SELECT * from user where name = #{name}
+    </select>
 </mapper>

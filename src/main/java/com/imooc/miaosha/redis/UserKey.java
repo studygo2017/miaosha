@@ -1,7 +1,5 @@
 package com.imooc.miaosha.redis;
 
-import com.imooc.miaosha.domain.User;
-
 public class UserKey extends BaseKey {
 
   /*  private String prefix;
@@ -27,13 +25,13 @@ public class UserKey extends BaseKey {
         this.expiredTime = expiredTime;
     }
 */
-    public static UserKey getGetIdKey() {
+   /* public static UserKey getGetIdKey() {
         return getIdKey;
     }
 
     public static UserKey getGetNameKey() {
         return getNameKey;
-    }
+    }*/
 
     private UserKey(String prefix, int expiredTime) {
         super(prefix, expiredTime);
@@ -52,6 +50,14 @@ public class UserKey extends BaseKey {
     final public static UserKey getIdKey = new UserKey("id");
 
     final public static UserKey getNameKey = new UserKey("name");
+
+
+
+    final public static int miaoshaExpiredTime = 30*60; //30分钟
+
+    final public static String maioshaToken = "miaoshaToken";
+
+    final public static UserKey getMiaoshaToken = new UserKey(maioshaToken,miaoshaExpiredTime);
 
     @Override
     public void addExpiredTime(int seconds) {

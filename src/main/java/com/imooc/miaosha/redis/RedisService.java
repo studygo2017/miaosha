@@ -34,12 +34,34 @@ public class RedisService {
         return null;
     }
 
-    public <T> boolean set(KeyPrefix prefix,String key,T t){
+    public <T> boolean set(KeyPrefix prefix,String key,T t,int seconds){
         Jedis jedis = null;
         try {
             jedis = jedisPool.getResource();
             String value = objToString(t);
-            jedis.set(prefix.getPrefix()+key,value);
+            //多并发上面，设置值和过期时间用了两步操作。故将设置值和过期时间合并成一步操作； NX是不存在时才set， XX是存在时才set， EX是秒，PX是毫秒(见源码注释)
+            jedis.set(prefix.getPrefix()+key,value,"NX","EX",seconds);
+            return true;
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return false;
+        }finally {
+            returnToPool(jedis);
+        }
+    }
+
+    public <T> boolean set(KeyPrefix prefix,String key,T t){
+        return this.set(prefix,key,t,0);
+    }
+
+    /**
+     * 设置key的过期时间
+     */
+    public boolean setExpiredTime(KeyPrefix prefix,String key,int seconds){
+        Jedis jedis = null;
+        try {
+            jedis = jedisPool.getResource();
+            jedis.expire(key,seconds);
             return true;
         }catch (Exception ex){
             ex.printStackTrace();

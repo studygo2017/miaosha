@@ -1,12 +1,13 @@
 package com.imooc.miaosha.controller;
 
-import com.imooc.miaosha.domain.User;
+import com.imooc.miaosha.domain.Result;
+import com.imooc.miaosha.pojo.User;
 import com.imooc.miaosha.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
 
 
 @Controller
@@ -27,5 +28,13 @@ public class UserController {
     @ResponseBody
     public int addUsers(){
         return userService.addUsers();
+    }
+
+    @PostMapping("/login")
+    @ResponseBody
+    public Result login(HttpServletResponse response, User user){
+        //若抛出全局异常，由springmvc全局异常拦截处理
+        userService.loginUser(response,user);
+        return Result.success();
     }
 }

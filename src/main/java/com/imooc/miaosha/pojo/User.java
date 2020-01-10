@@ -1,15 +1,17 @@
-package com.imooc.miaosha.domain;
+package com.imooc.miaosha.pojo;
 
 public class User {
     private Long id;
     private String name;
+    private String password;
 
     public User() {
     }
 
-    public User(Long id, String name) {
+    public User(Long id, String name, String password) {
         this.id = id;
         this.name = name;
+        this.password = password;
     }
 
     public Long getId() {
@@ -28,11 +30,20 @@ public class User {
         this.name = name;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
                 '}';
     }
 }

@@ -1,6 +1,6 @@
 package com.imooc.miaosha.redis;
 
-import com.imooc.miaosha.domain.User;
+import com.imooc.miaosha.pojo.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,19 +9,19 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class TestUserKey {
+public class TestRedisCRUD {
 
     @Autowired
     RedisService redisService;
 
     @Test
-    public void testAddExpiredTime(){
-        UserKey userKey = UserKey.getIdKey;
-        userKey.addExpiredTime((int)(10));
-        int expiredTime = userKey.getExpiredTime();
-        System.out.println(expiredTime);
-        redisService.set(userKey,"test",new User(6L,"fv"));
-        User user = redisService.get(userKey, "test", User.class);
+    public void testRedisSet(){
+        redisService.set(UserKey.getMiaoshaToken,"ms_user_0",new User(null,"user0","123"));
+    }
+
+    @Test
+    public void testRedisGet(){
+        User user = redisService.get(UserKey.getMiaoshaToken, "ms_user_0", User.class);
         System.out.println(user);
     }
 }

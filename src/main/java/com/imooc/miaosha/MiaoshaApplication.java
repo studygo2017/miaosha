@@ -15,7 +15,8 @@ public class MiaoshaApplication {
 
 
 	public static void main(String[] args)
-	{System.out.println("xxxxxxxxx");
+	{
+		System.out.println("xxxxxxxxx");
 		SpringApplication.run(MiaoshaApplication.class, args);
 	}
 

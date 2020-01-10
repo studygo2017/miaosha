@@ -4,7 +4,7 @@ public abstract class BaseKey implements KeyPrefix {
     private String prefix;
 
     //失效时间，单位为秒
-    private int expiredTime;
+    private int expiredTime = 0;
 
     public void setExpiredTime(int expiredTime) {
         this.expiredTime = expiredTime;
